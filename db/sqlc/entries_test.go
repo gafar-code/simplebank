@@ -45,7 +45,7 @@ func TestGetEntry(t *testing.T) {
 	require.NotEmpty(t, entry2)
 
 	require.Equal(t, entry1.ID, entry2.ID)
-	require.WithinDuration(t, entry1.CreatedAt.Time, entry2.CreatedAt.Time, time.Second)
+	require.WithinDuration(t, entry1.CreatedAt, entry2.CreatedAt, time.Second)
 }
 
 func TestUpdateEntry(t *testing.T) {

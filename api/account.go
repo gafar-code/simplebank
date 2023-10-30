@@ -91,3 +91,27 @@ func (server *Server) listAccount(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, res)
 }
+
+type softDeleteAccountRequest struct {
+	ID int64 `uri:"id" binding:"required,min=1"`
+}
+
+type softDeleteAccountResult struct {
+	Message string `json:"message"`
+}
+
+func (server *Server) softDeleteAccount(ctx *gin.Context) {
+	var req softDeleteAccountRequest
+	if err := ctx.ShouldBindUri(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
+
+	_, err := server.store.SoftDeleteAccount(ctx, req.ID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, softDeleteAccountResult{Message: "Account deleted successfully"})
+}

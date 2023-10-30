@@ -48,7 +48,7 @@ func TestGetTransfer(t *testing.T) {
 	require.NotEmpty(t, transfer2)
 
 	require.Equal(t, transfer1.ID, transfer2.ID)
-	require.WithinDuration(t, transfer1.CreatedAt.Time, transfer2.CreatedAt.Time, time.Second)
+	require.WithinDuration(t, transfer1.CreatedAt, transfer2.CreatedAt, time.Second)
 }
 
 func TestUpdateTransfer(t *testing.T) {

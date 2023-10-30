@@ -32,3 +32,7 @@ RETURNING *;
 -- name: DeleteAccount :exec
 
 DELETE FROM accounts WHERE id = $1;
+
+-- name: SoftDeleteAccount :one
+
+UPDATE accounts SET is_deleted = TRUE WHERE id = $1 RETURNING *;
