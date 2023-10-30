@@ -13,6 +13,6 @@ sql:
     #   emit_exact_table_names: false
 #   database:
 #     managed: true
-#     uri: "postgresql://root:secret@localhost:56779/simple_bank?sslmode=disable"
+#     uri: "postgresql://root:secret@localhost:62779/simple_bank?sslmode=disable"
 #   rules:
 #     - sqlc/db-prepare
