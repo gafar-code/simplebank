@@ -10,11 +10,17 @@ type Server struct {
 	router *gin.Engine
 }
 
+type Response struct {
+	Message string `json:"message"`
+}
+
 func NewServer(store *db.Store) *Server {
 	server := &Server{store: store}
 	router := gin.Default()
 
 	router.POST("/accounts", server.createAccount)
+	router.GET("/accounts/:id", server.getAccount)
+	router.GET("/accounts", server.listAccount)
 
 	server.router = router
 	return server
