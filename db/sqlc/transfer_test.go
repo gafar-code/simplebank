@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gafar-code/simplebank/utils"
+	"github.com/gafar-code/simplebank/util"
 	"github.com/stretchr/testify/require"
 )
 
@@ -17,7 +17,7 @@ func createRandomTx(t *testing.T) Transfer {
 	arg := CreateTransferParams{
 		FromAccountID: account1.ID,
 		ToAccountID:   account2.ID,
-		Amount:        utils.RandomMoney(),
+		Amount:        util.RandomMoney(),
 	}
 
 	transfer, err := testQueries.CreateTransfer(context.Background(), arg)
@@ -56,7 +56,7 @@ func TestUpdateTransfer(t *testing.T) {
 
 	arg := UpdateTransferParams{
 		ID:     transfer1.ID,
-		Amount: utils.RandomMoney(),
+		Amount: util.RandomMoney(),
 	}
 
 	transfer2, err := testQueries.UpdateTransfer(context.Background(), arg)

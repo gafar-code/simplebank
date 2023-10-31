@@ -107,11 +107,22 @@ func (server *Server) softDeleteAccount(ctx *gin.Context) {
 		return
 	}
 
-	_, err := server.store.SoftDeleteAccount(ctx, req.ID)
+	account, err := server.store.GetAccount(ctx, req.ID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
 
-	ctx.JSON(http.StatusOK, softDeleteAccountResult{Message: "Account deleted successfully"})
+	if account.IsDeleted {
+		ctx.JSON(http.StatusInternalServerError, softDeleteAccountResult{Message: "Akun tidak tersedia"})
+		return
+	}
+
+	_, err = server.store.SoftDeleteAccount(ctx, req.ID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, softDeleteAccountResult{Message: "Hapus akun berhasil"})
 }
